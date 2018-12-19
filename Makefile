@@ -1,10 +1,10 @@
 CXXFLAGS = -lfltk -lfltk_gl -lfltk_images `pkg-config --libs glu freealut`
-PROGR = playground3
+PROGR = Pacman3d
 
-all: playground3
+all: Pacman3d
 
-playground3:  readfile.cxx playground3.cxx playground3.h readfile.h
-	$(CXX) -Wall readfile.cxx playground3.cxx  -o $@ $(CXXFLAGS)
+Pacman3d:  readfile.cxx playground.cxx playground.h readfile.h
+	$(CXX) -Wall readfile.cxx playground.cxx  -o $@ $(CXXFLAGS)
 
 clean:
 	rm -rf $(PROGR) readfile
