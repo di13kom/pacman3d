@@ -6,8 +6,12 @@ if(UNIX)
 endif(UNIX)
 
 find_package(OpenGL REQUIRED)
-find_package(FLTK REQUIRED NO_MODULE)
+find_package(FLTK REQUIRED MODULE)
+
+#if(NOT MSYS)
 include_directories(${FLTK_INCLUDE_DIRS})
+#endif()
+
 find_package(OpenAL REQUIRED)
 
 include_directories(${CMAKE_BINARY_DIR})
@@ -22,4 +26,8 @@ file(COPY ${files_to_copy} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 #add_executable(Pacman3d WIN32 ${Sources} ${Headers} ${files_to_copy})
 add_executable(Pacman3d ${Sources} ${Headers})
 
-target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut openal)
+if(MSYS)
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32 alut openal)
+else()
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut openal)
+endif()

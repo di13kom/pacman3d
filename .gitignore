@@ -1,4 +1,3 @@
-build/
+*build/
 *.swp
 .vs
-mingw_build/
