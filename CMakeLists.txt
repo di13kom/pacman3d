@@ -6,10 +6,9 @@ if(UNIX)
 endif(UNIX)
 
 find_package(OpenGL REQUIRED)
-find_package(FLTK REQUIRED MODULE)
-
+find_package(FLTK REQUIRED)
 #if(NOT MSYS)
-include_directories(${FLTK_INCLUDE_DIRS})
+	include_directories(${FLTK_INCLUDE_DIRS})
 #endif()
 
 find_package(OpenAL REQUIRED)
