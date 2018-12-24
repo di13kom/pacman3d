@@ -7,9 +7,14 @@
 #include <FL/Fl_Shared_Image.H>
 #include <algorithm>
 //sound
+#ifdef WIN32
+#include <al.h>
+#include <alc.h>
+#else // WIN32
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
+#endif
 
 //
 #include "readfile.h"

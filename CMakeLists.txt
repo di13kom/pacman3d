@@ -15,6 +15,7 @@ find_package(OpenAL REQUIRED)
 
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${OPENAL_INCLUDE_DIR})
 
 set (Sources playground.cxx readfile.cxx)
 set (Headers playground.h readfile.h)
@@ -27,6 +28,8 @@ add_executable(Pacman3d ${Sources} ${Headers})
 
 if(MSYS)
 	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32 alut openal)
+elseif(WIN32)
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images opengl32 glu32 ${OPENAL_LIBRARY})
 else()
 	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut openal)
 endif()
