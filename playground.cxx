@@ -40,6 +40,7 @@ void MyGlWindow::InitAl()
 
 void MyGlWindow::PlaySound(int ind)
 {
+#ifdef SND_AVAILABLE
 	switch (ind)
 	{
 	case 0:
@@ -80,6 +81,7 @@ void MyGlWindow::PlaySound(int ind)
 		alGetSourcei(source, AL_SOURCE_STATE, &PlayState);
 		}
 		while (PlayState == AL_PLAYING);*/
+#endif
 }
 
 MyGlWindow::~MyGlWindow()
@@ -88,13 +90,12 @@ MyGlWindow::~MyGlWindow()
 	delete[] text;
 	delete[] MiniTex;
 	delete[] MiniQuads;
-	//alDeleteBuffers(7, buffer);
-	alDeleteSources(7, source);
 
 	// Exit everything
 	cout << "tst\n";
 #ifdef  SND_AVAILABLE
-
+	alDeleteSources(7, source);
+	//alDeleteBuffers(7, buffer);
 
 	alutExit();
 #endif //  SND_AVAILABLE

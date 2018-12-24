@@ -11,11 +11,16 @@ find_package(FLTK REQUIRED)
 	include_directories(${FLTK_INCLUDE_DIRS})
 #endif()
 
-find_package(OpenAL REQUIRED)
+#add -DSND_AVAILABLE=TRUE to command line
+if(SND_AVAILABLE)
+	find_package(OpenAL REQUIRED)
+	include_directories(${OPENAL_INCLUDE_DIR})
+	#add_definitions(-DSND_AVAILABLE)
+endif()
+
 
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR})
-include_directories(${OPENAL_INCLUDE_DIR})
 
 set (Sources playground.cxx readfile.cxx)
 set (Headers playground.h readfile.h)
@@ -26,12 +31,16 @@ file(COPY ${files_to_copy} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 #add_executable(Pacman3d WIN32 ${Sources} ${Headers} ${files_to_copy})
 add_executable(Pacman3d ${Sources} ${Headers})
 
-if(MSYS)
+if(SND_AVAILABLE)
 	target_compile_definitions(Pacman3d PRIVATE SND_AVAILABLE)
-	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32 alut openal)
-elseif(WIN32)
-	target_link_libraries(Pacman3d fltk fltk_gl fltk_images opengl32 glu32 ${OPENAL_LIBRARY})
-else()
-	target_compile_definitions(Pacman3d PRIVATE SND_AVAILABLE)
-	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut openal)
+	target_link_libraries(Pacman3d ${OPENAL_LIBRARY})
 endif()
+
+if(MSYS)
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32 alut )
+elseif(WIN32)
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images opengl32 glu32 )
+else()
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut)
+endif()
+
