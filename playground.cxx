@@ -9,10 +9,7 @@ extern vector <ghost> ghst;
 void MyGlWindow::InitAl()
 {
 #ifdef SND_AVAILABLE
-
-
 	alutInit(0, NULL);
-
 	// Capture errors
 	alGetError();
 	//

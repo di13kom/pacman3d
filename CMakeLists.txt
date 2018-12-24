@@ -33,14 +33,14 @@ add_executable(Pacman3d ${Sources} ${Headers})
 
 if(SND_AVAILABLE)
 	target_compile_definitions(Pacman3d PRIVATE SND_AVAILABLE)
-	target_link_libraries(Pacman3d ${OPENAL_LIBRARY})
+	target_link_libraries(Pacman3d ${OPENAL_LIBRARY} alut)
 endif()
 
 if(MSYS)
-	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32 alut )
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images glu32 opengl32)
 elseif(WIN32)
 	target_link_libraries(Pacman3d fltk fltk_gl fltk_images opengl32 glu32 )
 else()
-	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL alut)
+	target_link_libraries(Pacman3d fltk fltk_gl fltk_images GLU GL)
 endif()
 

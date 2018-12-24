@@ -8,13 +8,15 @@
 #include <algorithm>
 //
 //sound
-#ifdef WIN32
+#ifdef SND_AVAILABLE
+#ifdef _MSC_BUILD
 #include <al.h>
 #include <alc.h>
 #else // WIN32
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
+#endif
 #endif
 
 //
@@ -122,8 +124,10 @@ class MyGlWindow:public Fl_Gl_Window
 	bool LostLife;
 	bool DotEaten;
 	bool TabletEaten;
+#ifdef  SND_AVAILABLE
 	ALuint buffer[7], source[7];
 	ALint PlayState;
+#endif //  SND_AVAILABLE
 	//int PacPoint;
 	void draw();
 	void InitAl();
